@@ -3,15 +3,11 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 
-
-//dzięki temu możemy tutaj dodawać tylko liczby !!!
 public class MyList {
 
     private List<Integer> list = new ArrayList<>();
 
-
     public MyList() {
-
     }
 
 
@@ -46,7 +42,6 @@ public class MyList {
         return Lists.reverse(this.getList());
     }
 
-
     int getSum() {
         int sum = Integer.valueOf(0);
 
@@ -55,7 +50,6 @@ public class MyList {
         }
         return sum;
     }
-
 
     Integer getMin() {
         return this.getList()
