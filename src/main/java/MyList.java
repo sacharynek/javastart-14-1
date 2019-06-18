@@ -1,57 +1,74 @@
-import org.apache.commons.lang3.math.NumberUtils;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-//dzięki temu możemy tutaj dodawać tylko liczby !!!
-public class MyList<T extends Number & Comparable> {
 
-    private ArrayList<T> list = new ArrayList<T>();
-    T max = (T) NumberUtils.createNumber("0");
-    T min;
+//dzięki temu możemy tutaj dodawać tylko liczby !!!
+public class MyList {
+
+    private List<Integer> list = new ArrayList<>();
+
 
     public MyList() {
 
     }
 
-    public List<T> getList() {
+
+    public List<Integer> getList() {
         return list;
     }
 
-    public int compare(T a, T b) throws ClassCastException {
+    public int compare(Integer a, Integer b) throws ClassCastException {
         return a.compareTo(b);
     }
 
-    public int compareToZero(T a) {
-        return compare(a, (T) NumberUtils.createNumber("0"));
+    public int compareToZero(Integer a) {
+        return a.compareTo(0);
     }
 
-    void addToList(T element) {
-        if (compareToZero(element) > 0) {
-            if (compare(max, element) > 0) {
-                max = element;
-            }
-            if (compare(min, element) < 0) {
-                min = element;
-            }
+    public Integer convestStringToType(String text) {
+        return Integer.valueOf(text);
+    }
+
+    boolean addToList(String text) {
+        Integer element = Integer.valueOf(text);
+
+        boolean output = compareToZero(element) > 0;
+        if (output) {
+
             list.add(element);
         }
+        return output;
     }
 
-    void reverse() {
-        Collections.reverse(this.getList());
+    List<Integer> reverse() {
+        return Lists.reverse(this.getList());
     }
 
-    void initializeMin(T a) {
-        this.min = a;
+
+    int getSum() {
+        int sum = Integer.valueOf(0);
+
+        for (Integer element : getList()) {
+            sum = Integer.sum(sum, element);
+        }
+        return sum;
     }
 
-    void displaySum(){
-        this.getList().forEach(item->{
-            System.out.print(item +" + ");
-        });
+
+    Integer getMin() {
+        return this.getList()
+                .stream()
+                .mapToInt(v -> v)
+                .min().getAsInt();
     }
 
+    Integer getMax() {
+        return this.getList()
+                .stream()
+                .mapToInt(v -> v)
+                .max().getAsInt();
+    }
 
 }
